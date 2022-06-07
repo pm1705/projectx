@@ -46,7 +46,6 @@ public class login_activity extends AppCompatActivity {
                     currentPass = "" + data.child("pass").getValue();
                     usersEmails.add(currentMail);
                     usersPasswords.add(currentPass);
-                    System.out.println(currentMail + " --- " + currentPass);
                 }
             }
             @Override
@@ -71,7 +70,7 @@ public class login_activity extends AppCompatActivity {
         if (email_exist){
             if (tempPass.equals(usersPasswords.get(userId))){
                 //next screen
-                errors.setText("tatata");
+                errors.setText("succesful login!");
             }
             else{
                 errors.setText("Password isn't correct.");
