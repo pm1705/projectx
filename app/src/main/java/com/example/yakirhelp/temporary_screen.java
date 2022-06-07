@@ -16,7 +16,7 @@ public class temporary_screen extends AppCompatActivity {
         setContentView(R.layout.activity_temporary_screen);
 
         login_intent = new Intent(this, com.example.yakirhelp.login_activity.class);
-        //register_intent = new Intent(this, com.example.yakirhelp.register_activity.class);
+        // register_intent = new Intent(this, com.example.yakirhelp.register_activity.class);
     }
 
     public void login_submit(View view) {
