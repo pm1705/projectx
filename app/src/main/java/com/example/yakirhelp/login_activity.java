@@ -20,7 +20,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class login_activity extends AppCompatActivity {
 
     EditText email, pass;
     String tempMail, tempPass, currentMail, currentPass;
