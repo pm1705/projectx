@@ -9,8 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Yakirhelp">
-        <activity android:name=".temporary_screen"></activity>
-        <activity android:name=".login_activity">
+        <activity android:name=".register_activity"></activity>
+        <activity android:name=".login_activity" />
+        <activity android:name=".temp_screen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

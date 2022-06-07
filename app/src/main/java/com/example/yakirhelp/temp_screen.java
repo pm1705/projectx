@@ -1,22 +1,23 @@
 package com.example.yakirhelp;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-public class temporary_screen extends AppCompatActivity {
+import androidx.appcompat.app.AppCompatActivity;
+
+
+public class temp_screen extends AppCompatActivity {
 
     Intent login_intent, register_intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_temporary_screen);
+        setContentView(R.layout.temporay_activity);
 
-        login_intent = new Intent(this, com.example.yakirhelp.login_activity.class);
-        //  register_intent = new Intent(this, com.example.yakirhelp.register_activity.class);
+        login_intent = new Intent(this, login_activity.class);
+        register_intent = new Intent(this, com.example.yakirhelp.register_activity.class);
     }
 
     public void login_submit(View view) {
@@ -27,3 +28,4 @@ public class temporary_screen extends AppCompatActivity {
         startActivity(register_intent);
     }
 }
+
