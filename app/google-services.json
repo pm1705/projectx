@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "184717789337",
+    "project_id": "yakirhelp",
+    "storage_bucket": "yakirhelp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:184717789337:android:8d396c17073f256c835008",
+        "android_client_info": {
+          "package_name": "com.example.yakirhelp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "184717789337-ha3i783q9fphq35roe368bv67hq2cbtb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDJwFpuMScnHXjeD0ThpWpGLDSIChcyZYc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "184717789337-ha3i783q9fphq35roe368bv67hq2cbtb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
