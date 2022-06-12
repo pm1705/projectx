@@ -8,4 +8,5 @@ class FBRefs {
     public static FirebaseDatabase FBDB = FirebaseDatabase.getInstance();
 
     public static DatabaseReference refUsers = FBDB.getReference("Users");
+    public static DatabaseReference refRecipes = FBDB.getReference("Recipes");
 }
