@@ -4,6 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -16,7 +18,7 @@ import java.util.ArrayList;
 
 import static com.example.yakirhelp.FBRefs.refUsers;
 
-public class register_activity extends AppCompatActivity {
+public class register_activity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     EditText uname, email, pass, age, weight, height, location;
     Spinner gender, activity_level;
@@ -24,6 +26,8 @@ public class register_activity extends AppCompatActivity {
     TextView errors;
     ArrayList usersEmails;
     int next_id;
+    String[] sex_options = {"Male", "Female", "Other"};
+    String[] activity_options = {"1", "2", "3", "4", "5"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +44,19 @@ public class register_activity extends AppCompatActivity {
         activity_level = (Spinner)findViewById(R.id.activity_level_register);
         location = (EditText)findViewById(R.id.location_register);
         errors = (TextView)findViewById(R.id.error);
+
+        gender.setOnItemSelectedListener(this);
+        str_gender = "none";
+        ArrayAdapter<String> gender_adp = new ArrayAdapter<String>(this,
+                R.layout.support_simple_spinner_dropdown_item,sex_options);
+        gender.setAdapter(gender_adp);
+
+        activity_level.setOnItemSelectedListener(this);
+        str_activity_level = "none";
+        ArrayAdapter<String> activity_adp = new ArrayAdapter<String>(this,
+                R.layout.support_simple_spinner_dropdown_item,activity_options);
+        activity_level.setAdapter(activity_adp);
+
 
         usersEmails = new ArrayList();
 
@@ -101,6 +118,16 @@ public class register_activity extends AppCompatActivity {
         return true;
     }
 
+    private boolean valid_gender(){
+        if (str_gender == "none") return false;
+        return true;
+    }
+
+    private boolean valid_activity_level(){
+        if (str_activity_level == "none") return false;
+        return true;
+    }
+
     public void submitRegister(View view) {
         String error = "";
         if (!valid_uname()) error += "Username is too short.\n";
@@ -110,6 +137,8 @@ public class register_activity extends AppCompatActivity {
         if (!valid_weight()) error += "Invalid weight.\n";
         if (!valid_height()) error += "Invalid height.\n";
         if (!valid_location()) error += "Invalid location.\n";
+        if (!valid_gender()) error += "Must choose gender.\n";
+        if (!valid_activity_level()) error += "Must choose activity level.\n";
         errors.setText(error);
         if (error == ""){
             next_id = usersEmails.size();
@@ -120,7 +149,23 @@ public class register_activity extends AppCompatActivity {
             refUsers.child(Integer.toString(next_id)).child("age").setValue(str_age);
             refUsers.child(Integer.toString(next_id)).child("weight").setValue(str_weight);
             refUsers.child(Integer.toString(next_id)).child("height").setValue(str_height);
+            refUsers.child(Integer.toString(next_id)).child("gender").setValue(str_gender);
+            refUsers.child(Integer.toString(next_id)).child("activityLevel").setValue(str_activity_level);
             refUsers.child(Integer.toString(next_id)).child("location").setValue(str_location);
         }
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+        if (adapterView.getResources().getResourceEntryName(adapterView.getId()).equals("gender_register")) {
+            str_gender = sex_options[i];
+        }
+        if (adapterView.getResources().getResourceEntryName(adapterView.getId()).equals("activity_level_register")) {
+            str_activity_level = activity_options[i];
+        }
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
     }
 }
