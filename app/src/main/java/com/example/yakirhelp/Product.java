@@ -4,12 +4,14 @@ import java.util.ArrayList;
 
 public class Product {
     private String name;
+    private String description;
     private double cal;
     private boolean kosher;
     private String key;
 
-    public Product(String name, double cal, boolean kosher, String key){
+    public Product(String name, String description, double cal, boolean kosher, String key){
         this.name = name;
+        this.description = description;
         this.cal = cal;
         this.kosher = kosher;
         this.key = key;
@@ -21,6 +23,14 @@ public class Product {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public double getCal() {

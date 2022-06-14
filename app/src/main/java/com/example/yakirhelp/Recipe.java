@@ -15,19 +15,10 @@ public class Recipe extends Product {
     public Recipe(String name, String description, double cal, boolean kosher,
                   ArrayList<String> instructions, ArrayList<String> ingredients,
                   ArrayList<String> toppings, String key) {
-        super(name, cal, kosher, key);
-        this.description = description;
+        super(name, description, cal, kosher, key);
         this.instructions = instructions;
         this.ingredients = ingredients;
         this.toppings = toppings;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public ArrayList<String> getInstructions() {
