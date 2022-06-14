@@ -18,6 +18,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 import static com.example.yakirhelp.FBRefs.refUsers;
+import static com.example.yakirhelp.main_screen_activity.current_user;
 
 public class personal_page extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
 
@@ -29,7 +30,7 @@ public class personal_page extends AppCompatActivity implements AdapterView.OnIt
     int next_id, int_activity_level, int_gender;
     String[] sex_options = {"Male", "Female", "Other"};
     String[] activity_options = {"1", "2", "3", "4", "5"};
-    User curUser = new User("JhonDoe", "jhon@doe.gmail", "jhon12345", "Israel", 0, 123, 324, 54, 3);
+    //User curUser = new User("JhonDoe", "jhon@doe.gmail", "jhon12345", "Israel", 0, 123, 324, 54, 3);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,15 +48,15 @@ public class personal_page extends AppCompatActivity implements AdapterView.OnIt
         location = (EditText)findViewById(R.id.location_register);
         errors = (TextView)findViewById(R.id.error);
 
-        uname.setText(curUser.getName());
-        email.setText(curUser.getEmail());
-        pass.setText(curUser.getPassword());
-        age.setText("" + curUser.getAge());
-        weight.setText("" + curUser.getWeight());
-        height.setText("" + curUser.getHeight());
-        gender.setSelection(curUser.getGender());
-        activity_level.setSelection(curUser.getActivity_level());
-        location.setText(curUser.getLocation());
+        uname.setText(current_user.getName());
+        email.setText(current_user.getEmail());
+        pass.setText(current_user.getPassword());
+        age.setText("" + current_user.getAge());
+        weight.setText("" + current_user.getWeight());
+        height.setText("" + current_user.getHeight());
+        gender.setSelection(current_user.getGender());
+        activity_level.setSelection(current_user.getActivity_level());
+        location.setText(current_user.getLocation());
 
 
         gender.setOnItemSelectedListener(this);
@@ -142,7 +143,8 @@ public class personal_page extends AppCompatActivity implements AdapterView.OnIt
 
     public boolean free_email(){
         str_email = email.getText().toString();
-        if  (usersEmails.contains(str_email)){
+        System.out.println(str_email + "," + current_user.getEmail());
+        if  (usersEmails.contains(str_email) && !str_email.equals(current_user.getEmail())){
             return false;
         }
         return true;
@@ -150,7 +152,7 @@ public class personal_page extends AppCompatActivity implements AdapterView.OnIt
 
     public void submitChanges(View view) {
         String error = "";
-        System.out.println(curUser.getId());
+        System.out.println(current_user.getId());
         if (!valid_uname()) error += "Username is too short.\n";
         if (!valid_email()) error += "Invalid email.\n";
         if (!free_email()) error += "Email in use.\n";
@@ -163,16 +165,16 @@ public class personal_page extends AppCompatActivity implements AdapterView.OnIt
         if (!valid_activity_level()) error += "Must choose activity level.\n";
         errors.setText(error);
         if (error == ""){
-            refUsers.child(Integer.toString(curUser.getId())).setValue("");
-            refUsers.child(Integer.toString(curUser.getId())).child("username").setValue(str_uname);
-            refUsers.child(Integer.toString(curUser.getId())).child("email").setValue(str_email);
-            refUsers.child(Integer.toString(curUser.getId())).child("pass").setValue(str_pass);
-            refUsers.child(Integer.toString(curUser.getId())).child("age").setValue(str_age);
-            refUsers.child(Integer.toString(curUser.getId())).child("weight").setValue(str_weight);
-            refUsers.child(Integer.toString(curUser.getId())).child("height").setValue(str_height);
-            refUsers.child(Integer.toString(curUser.getId())).child("gender").setValue(int_gender);
-            refUsers.child(Integer.toString(curUser.getId())).child("activityLevel").setValue(int_activity_level);
-            refUsers.child(Integer.toString(curUser.getId())).child("location").setValue(str_location);
+            refUsers.child(Integer.toString(current_user.getId())).setValue("");
+            refUsers.child(Integer.toString(current_user.getId())).child("username").setValue(str_uname);
+            refUsers.child(Integer.toString(current_user.getId())).child("email").setValue(str_email);
+            refUsers.child(Integer.toString(current_user.getId())).child("pass").setValue(str_pass);
+            refUsers.child(Integer.toString(current_user.getId())).child("age").setValue(str_age);
+            refUsers.child(Integer.toString(current_user.getId())).child("weight").setValue(str_weight);
+            refUsers.child(Integer.toString(current_user.getId())).child("height").setValue(str_height);
+            refUsers.child(Integer.toString(current_user.getId())).child("gender").setValue(int_gender);
+            refUsers.child(Integer.toString(current_user.getId())).child("activityLevel").setValue(int_activity_level);
+            refUsers.child(Integer.toString(current_user.getId())).child("location").setValue(str_location);
         }
     }
 

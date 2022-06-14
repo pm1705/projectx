@@ -1,6 +1,7 @@
 package com.example.yakirhelp;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 
@@ -9,7 +10,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class temp_screen extends AppCompatActivity {
 
-    Intent login_intent, register_intent;
+    Intent login_intent, register_intent, main_screen_intent;
+
+    SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,6 +21,14 @@ public class temp_screen extends AppCompatActivity {
 
         login_intent = new Intent(this, login_activity.class);
         register_intent = new Intent(this, com.example.yakirhelp.register_activity.class);
+        main_screen_intent = new Intent(this, com.example.yakirhelp.main_screen_activity.class);
+
+        SharedPreferences logged_information = getSharedPreferences("INFO",MODE_PRIVATE);
+        editor = logged_information.edit();
+
+        if (logged_information.getBoolean("logged_in",false)){
+            startActivity(main_screen_intent);
+        }
     }
 
     public void login_submit(View view) {

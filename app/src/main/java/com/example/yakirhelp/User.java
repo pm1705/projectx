@@ -7,8 +7,8 @@ public class User {
     int weight, height, age, activity_level, gender, id;
     ArrayList<Integer> recipes, favorites;
 
-    public User(String name, String email, String password, String location, int gender, int weight, int height, int age, int activity_level) {
-        generate_id();
+    public User(String name, String email, String password, String location, int gender, int weight, int height, int age, int activity_level, int id) {
+        this.id = id;
         this.name = name;
         this.email = email;
         this.password = password;
@@ -114,9 +114,5 @@ public class User {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    private void generate_id(){
-        this.id = 6;
     }
 }

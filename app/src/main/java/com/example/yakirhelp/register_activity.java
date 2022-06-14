@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -24,13 +25,18 @@ public class register_activity extends AppCompatActivity implements AdapterView.
 
     EditText uname, email, pass, age, weight, height, location;
     Spinner gender, activity_level;
-    String str_uname, str_email, str_pass, str_age, str_weight, str_height, str_location, currentMail;
     TextView errors;
-    ArrayList usersEmails;
+
+    String str_uname, str_email, str_pass, str_age, str_weight, str_height, str_location, currentMail;
     int next_id, int_activity_level, int_gender;
+
+    ArrayList usersEmails;
     String[] sex_options = {"Male", "Female", "Other"};
     String[] activity_options = {"1", "2", "3", "4", "5"};
+
     Intent main_screen;
+
+    SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +44,10 @@ public class register_activity extends AppCompatActivity implements AdapterView.
         setContentView(R.layout.activity_register_activity);
 
         main_screen = new Intent(this, main_screen_activity.class);
+
+        SharedPreferences logged_information = getSharedPreferences("INFO",MODE_PRIVATE);
+        editor = logged_information.edit();
+
 
         uname = (EditText)findViewById(R.id.uname_register);
         email = (EditText)findViewById(R.id.email_register);
@@ -61,7 +71,6 @@ public class register_activity extends AppCompatActivity implements AdapterView.
         ArrayAdapter<String> activity_adp = new ArrayAdapter<String>(this,
                 R.layout.support_simple_spinner_dropdown_item,activity_options);
         activity_level.setAdapter(activity_adp);
-
 
         usersEmails = new ArrayList();
 
@@ -155,7 +164,9 @@ public class register_activity extends AppCompatActivity implements AdapterView.
         if (!valid_activity_level()) error += "Must choose activity level.\n";
         errors.setText(error);
         if (error == ""){
+
             next_id = usersEmails.size();
+
             refUsers.child(Integer.toString(next_id)).setValue("");
             refUsers.child(Integer.toString(next_id)).child("username").setValue(str_uname);
             refUsers.child(Integer.toString(next_id)).child("email").setValue(str_email);
@@ -166,7 +177,17 @@ public class register_activity extends AppCompatActivity implements AdapterView.
             refUsers.child(Integer.toString(next_id)).child("gender").setValue(int_gender);
             refUsers.child(Integer.toString(next_id)).child("activityLevel").setValue(int_activity_level);
             refUsers.child(Integer.toString(next_id)).child("location").setValue(str_location);
+
+            editor.putBoolean("logged_in",true);
+            editor.putInt("key_id",next_id);
+            editor.commit();
+
             startActivity(main_screen);
+        }
+        else{
+            editor.putBoolean("logged_in",false);
+            editor.putInt("key_id",-1);
+            editor.commit();
         }
     }
 

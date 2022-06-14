@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -19,12 +20,16 @@ import java.util.ArrayList;
 public class login_activity extends AppCompatActivity {
 
     EditText email, pass;
-    String tempMail, tempPass, currentMail, currentPass;
     TextView errors;
+
     ArrayList usersEmails,usersPasswords;
     boolean email_exist;
+    String tempMail, tempPass, currentMail, currentPass;
     int userId;
+
     Intent main_screen;
+
+    SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +37,9 @@ public class login_activity extends AppCompatActivity {
         setContentView(R.layout.activity_login_activity);
 
         main_screen = new Intent(this, main_screen_activity.class);
+
+        SharedPreferences logged_information = getSharedPreferences("INFO",MODE_PRIVATE);
+        editor = logged_information.edit();
 
         email = (EditText)findViewById(R.id.emailInput);
         pass = (EditText)findViewById(R.id.passInput);
@@ -73,16 +81,27 @@ public class login_activity extends AppCompatActivity {
         }
         if (email_exist){
             if (tempPass.equals(usersPasswords.get(userId))){
-                //next screen
+
                 errors.setText("succesful login!");
+
+                editor.putBoolean("logged_in",true);
+                editor.putInt("key_id",userId);
+                editor.commit();
+
                 startActivity(main_screen);
             }
             else{
                 errors.setText("Password isn't correct.");
+                editor.putBoolean("logged_in",false);
+                editor.putInt("key_id",-1);
+                editor.commit();
             }
         }
         else {
             errors.setText("there is no user associated with this email address.");
+            editor.putBoolean("logged_in",false);
+            editor.putInt("key_id",-1);
+            editor.commit();
         }
 
     }
