@@ -60,13 +60,20 @@
             android:onClick="new_recipe"
             android:text="new recipe" />
 
-        <Button
-            android:id="@+id/button8"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="0px"
             android:layout_weight="5"
-            android:onClick="my_recipes"
-            android:text="my recipes" />
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/button8"
+                android:layout_width="0px"
+                android:layout_height="match_parent"
+                android:layout_weight="30"
+                android:onClick="browse_recipes"
+                android:text="Recipe View" />
+        </LinearLayout>
 
         <Space
             android:layout_width="match_parent"

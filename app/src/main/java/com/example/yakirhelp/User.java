@@ -5,9 +5,9 @@ import java.util.ArrayList;
 public class User {
     String name, email, password, location;
     int weight, height, age, activity_level, gender, id;
-    ArrayList<Integer> recipes, favorites;
+    String  recipes, favorites;
 
-    public User(String name, String email, String password, String location, int gender, int weight, int height, int age, int activity_level, int id) {
+    public User(String name, String email, String password, String location, int gender, int weight, int height, int age, int activity_level, int id, String recipes, String favorites) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -18,6 +18,8 @@ public class User {
         this.age = age;
         this.activity_level = activity_level;
         this.location = location;
+        this.recipes = recipes;
+        this.favorites = favorites;
     }
 
     public String getName() {
@@ -80,19 +82,19 @@ public class User {
         return activity_level;
     }
 
-    public ArrayList<Integer> getRecipes() {
+    public String getRecipes() {
         return recipes;
     }
 
-    public void setRecipes(ArrayList<Integer> recipes) {
+    public void setRecipes(String recipes) {
         this.recipes = recipes;
     }
 
-    public ArrayList<Integer> getFavorites() {
+    public String getFavorites() {
         return favorites;
     }
 
-    public void setFavorites(ArrayList<Integer> favorites) {
+    public void setFavorites(String favorites) {
         this.favorites = favorites;
     }
 

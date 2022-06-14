@@ -177,6 +177,8 @@ public class register_activity extends AppCompatActivity implements AdapterView.
             refUsers.child(Integer.toString(next_id)).child("gender").setValue(int_gender);
             refUsers.child(Integer.toString(next_id)).child("activityLevel").setValue(int_activity_level);
             refUsers.child(Integer.toString(next_id)).child("location").setValue(str_location);
+            refUsers.child(Integer.toString(next_id)).child("recipes").setValue("");
+            refUsers.child(Integer.toString(next_id)).child("favorites").setValue("");
 
             editor.putBoolean("logged_in",true);
             editor.putInt("key_id",next_id);
