@@ -121,6 +121,7 @@ public class AddRecipe extends AppCompatActivity {
             refRecipes.child(key).child("instructions").setValue(str_instructions);
             refRecipes.child(key).child("topping").setValue(str_topping);
             refRecipes.child(key).child("kosher").setValue(kosher.isChecked());
+            // add to user
         }
     }
 }

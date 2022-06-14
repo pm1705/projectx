@@ -6,12 +6,16 @@
         <entry key="..\:/Code/noa/app/src/main/res/layout/activity_add_recipe.xml" value="0.5" />
         <entry key="..\:/Code/noa/app/src/main/res/layout/activity_add_restaruant.xml" value="0.5208333333333334" />
         <entry key="..\:/Code/noa/app/src/main/res/layout/activity_login_activity.xml" value="0.28020833333333334" />
+        <entry key="..\:/Code/noa/app/src/main/res/layout/activity_main.xml" value="0.5208333333333334" />
+        <entry key="..\:/Code/noa/app/src/main/res/layout/activity_my_recipes.xml" value="0.5208333333333334" />
+        <entry key="..\:/Code/noa/app/src/main/res/layout/activity_recipe_page.xml" value="0.5208333333333334" />
         <entry key="..\:/Code/noa/app/src/main/res/layout/activity_register_activity.xml" value="0.5" />
-        <entry key="..\:/Code/noa/app/src/main/res/layout/temporay_activity.xml" value="0.28020833333333334" />
+        <entry key="..\:/Code/noa/app/src/main/res/layout/activity_vitamin_table.xml" value="0.5208333333333334" />
+        <entry key="..\:/Code/noa/app/src/main/res/layout/temporay_activity.xml" value="0.5" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="false" project-jdk-name="11" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
