@@ -3,7 +3,6 @@ package com.example.yakirhelp;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -20,7 +19,7 @@ import java.util.ArrayList;
 
 import static com.example.yakirhelp.FBRefs.refUsers;
 
-public class register_activity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class personal_page extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
 
     EditText uname, email, pass, age, weight, height, location;
     Spinner gender, activity_level;
@@ -30,14 +29,12 @@ public class register_activity extends AppCompatActivity implements AdapterView.
     int next_id, int_activity_level, int_gender;
     String[] sex_options = {"Male", "Female", "Other"};
     String[] activity_options = {"1", "2", "3", "4", "5"};
-    Intent main_screen;
+    User curUser = new User("JhonDoe", "jhon@doe.gmail", "jhon12345", "Israel", 0, 123, 324, 54, 3);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register_activity);
-
-        main_screen = new Intent(this, main_screen_activity.class);
+        setContentView(R.layout.activity_personal_page);
 
         uname = (EditText)findViewById(R.id.uname_register);
         email = (EditText)findViewById(R.id.email_register);
@@ -50,18 +47,26 @@ public class register_activity extends AppCompatActivity implements AdapterView.
         location = (EditText)findViewById(R.id.location_register);
         errors = (TextView)findViewById(R.id.error);
 
+        uname.setText(curUser.getName());
+        email.setText(curUser.getEmail());
+        pass.setText(curUser.getPassword());
+        age.setText("" + curUser.getAge());
+        weight.setText("" + curUser.getWeight());
+        height.setText("" + curUser.getHeight());
+        gender.setSelection(curUser.getGender());
+        activity_level.setSelection(curUser.getActivity_level());
+        location.setText(curUser.getLocation());
+
+
         gender.setOnItemSelectedListener(this);
-        int_gender = -1;
         ArrayAdapter<String> gender_adp = new ArrayAdapter<String>(this,
                 R.layout.support_simple_spinner_dropdown_item,sex_options);
         gender.setAdapter(gender_adp);
 
         activity_level.setOnItemSelectedListener(this);
-        int_activity_level = -1;
         ArrayAdapter<String> activity_adp = new ArrayAdapter<String>(this,
                 R.layout.support_simple_spinner_dropdown_item,activity_options);
         activity_level.setAdapter(activity_adp);
-
 
         usersEmails = new ArrayList();
 
@@ -79,6 +84,8 @@ public class register_activity extends AppCompatActivity implements AdapterView.
             public void onCancelled(@NonNull DatabaseError databaseError) {
             }
         });
+
+
     }
 
     private boolean valid_uname(){
@@ -141,8 +148,9 @@ public class register_activity extends AppCompatActivity implements AdapterView.
         return true;
     }
 
-    public void submitRegister(View view) {
+    public void submitChanges(View view) {
         String error = "";
+        System.out.println(curUser.getId());
         if (!valid_uname()) error += "Username is too short.\n";
         if (!valid_email()) error += "Invalid email.\n";
         if (!free_email()) error += "Email in use.\n";
@@ -155,18 +163,16 @@ public class register_activity extends AppCompatActivity implements AdapterView.
         if (!valid_activity_level()) error += "Must choose activity level.\n";
         errors.setText(error);
         if (error == ""){
-            next_id = usersEmails.size();
-            refUsers.child(Integer.toString(next_id)).setValue("");
-            refUsers.child(Integer.toString(next_id)).child("username").setValue(str_uname);
-            refUsers.child(Integer.toString(next_id)).child("email").setValue(str_email);
-            refUsers.child(Integer.toString(next_id)).child("pass").setValue(str_pass);
-            refUsers.child(Integer.toString(next_id)).child("age").setValue(str_age);
-            refUsers.child(Integer.toString(next_id)).child("weight").setValue(str_weight);
-            refUsers.child(Integer.toString(next_id)).child("height").setValue(str_height);
-            refUsers.child(Integer.toString(next_id)).child("gender").setValue(int_gender);
-            refUsers.child(Integer.toString(next_id)).child("activityLevel").setValue(int_activity_level);
-            refUsers.child(Integer.toString(next_id)).child("location").setValue(str_location);
-            startActivity(main_screen);
+            refUsers.child(Integer.toString(curUser.getId())).setValue("");
+            refUsers.child(Integer.toString(curUser.getId())).child("username").setValue(str_uname);
+            refUsers.child(Integer.toString(curUser.getId())).child("email").setValue(str_email);
+            refUsers.child(Integer.toString(curUser.getId())).child("pass").setValue(str_pass);
+            refUsers.child(Integer.toString(curUser.getId())).child("age").setValue(str_age);
+            refUsers.child(Integer.toString(curUser.getId())).child("weight").setValue(str_weight);
+            refUsers.child(Integer.toString(curUser.getId())).child("height").setValue(str_height);
+            refUsers.child(Integer.toString(curUser.getId())).child("gender").setValue(int_gender);
+            refUsers.child(Integer.toString(curUser.getId())).child("activityLevel").setValue(int_activity_level);
+            refUsers.child(Integer.toString(curUser.getId())).child("location").setValue(str_location);
         }
     }
 
@@ -182,5 +188,8 @@ public class register_activity extends AppCompatActivity implements AdapterView.
 
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
+    }
+
+    public void submit_changes(View view) {
     }
 }

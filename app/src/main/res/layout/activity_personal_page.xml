@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".register_activity">
+    tools:context=".personal_page">
 
     <Space
         android:layout_width="wrap_content"
@@ -28,7 +28,7 @@
             android:layout_height="0px"
             android:layout_weight="10"
             android:gravity="center"
-            android:text="register" />
+            android:text="your account information" />
 
         <Space
             android:layout_width="match_parent"
@@ -130,8 +130,8 @@
             android:layout_width="match_parent"
             android:layout_height="0px"
             android:layout_weight="5"
-            android:onClick="submitRegister"
-            android:text="Button" />
+            android:onClick="submitChanges"
+            android:text="submit changes" />
 
         <Space
             android:layout_width="match_parent"
@@ -141,7 +141,7 @@
     </LinearLayout>
 
     <Space
-        android:layout_width="wrap_content"
+        android:layout_width="0px"
         android:layout_height="wrap_content"
         android:layout_weight="5" />
 </LinearLayout>

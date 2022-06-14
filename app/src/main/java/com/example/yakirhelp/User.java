@@ -3,11 +3,12 @@ package com.example.yakirhelp;
 import java.util.ArrayList;
 
 public class User {
-    String name, email, password, gender;
-    int weight, height, age, activity_level;
+    String name, email, password, location;
+    int weight, height, age, activity_level, gender, id;
     ArrayList<Integer> recipes, favorites;
 
-    public User(String name, String email, String password, String gender, int weight, int height, int age, int activity_level) {
+    public User(String name, String email, String password, String location, int gender, int weight, int height, int age, int activity_level) {
+        generate_id();
         this.name = name;
         this.email = email;
         this.password = password;
@@ -16,6 +17,7 @@ public class User {
         this.height = height;
         this.age = age;
         this.activity_level = activity_level;
+        this.location = location;
     }
 
     public String getName() {
@@ -42,11 +44,11 @@ public class User {
         this.password = password;
     }
 
-    public String getGender() {
+    public int getGender() {
         return gender;
     }
 
-    public void setGender(String gender) {
+    public void setGender(int gender) {
         this.gender = gender;
     }
 
@@ -96,5 +98,25 @@ public class User {
 
     public void setActivity_level(int activity_level) {
         this.activity_level = activity_level;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    private void generate_id(){
+        this.id = 6;
     }
 }

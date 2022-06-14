@@ -15,13 +15,13 @@ public class main_screen_activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_screen_activity);
 
-        //peronal_page_intent = new Intent(this, personal_page.class);
+        peronal_page_intent = new Intent(this, personal_page.class);
         //new_recipe_intent = new Intent(this, new_recipe.class);
         //my_recipes_intent = new Intent(this, my_recipes.class);
     }
 
     public void personal_page(View view) {
-        //startActivity(peronal_page_intent);
+        startActivity(peronal_page_intent);
     }
 
     public void new_recipe(View view) {
