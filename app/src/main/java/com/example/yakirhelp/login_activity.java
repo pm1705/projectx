@@ -3,6 +3,7 @@ package com.example.yakirhelp;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -23,11 +24,14 @@ public class login_activity extends AppCompatActivity {
     ArrayList usersEmails,usersPasswords;
     boolean email_exist;
     int userId;
+    Intent main_screen;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_activity);
+
+        main_screen = new Intent(this, main_screen_activity.class);
 
         email = (EditText)findViewById(R.id.emailInput);
         pass = (EditText)findViewById(R.id.passInput);
@@ -71,6 +75,7 @@ public class login_activity extends AppCompatActivity {
             if (tempPass.equals(usersPasswords.get(userId))){
                 //next screen
                 errors.setText("succesful login!");
+                startActivity(main_screen);
             }
             else{
                 errors.setText("Password isn't correct.");
