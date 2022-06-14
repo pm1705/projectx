@@ -24,7 +24,6 @@ public class AddRecipe extends AppCompatActivity {
     EditText name, description, cal, ingredients, instructions, topping;
     Switch kosher;
     String str_name, str_description, str_cal, str_ingredients, str_instructions, str_topping;
-    boolean bool_kosher;
     TextView errors;
 
     ArrayList Recipes;
@@ -112,15 +111,16 @@ public class AddRecipe extends AppCompatActivity {
         if (!valid_instructions()){errors += "must be at least one instruction.\n";}
         if (!valid_topping()){errors += "\n";}
         if (errors == ""){
-            next_key = Recipes.size();
-            refRecipes.child(Integer.toString(next_key)).setValue("");
-            refRecipes.child(Integer.toString(next_key)).child("name").setValue(str_name);
-            refRecipes.child(Integer.toString(next_key)).child("description").setValue(str_description);
-            refRecipes.child(Integer.toString(next_key)).child("cal").setValue(str_cal);
-            refRecipes.child(Integer.toString(next_key)).child("ingredients").setValue(str_ingredients);
-            refRecipes.child(Integer.toString(next_key)).child("instructions").setValue(str_instructions);
-            refRecipes.child(Integer.toString(next_key)).child("topping").setValue(str_topping);
-            refRecipes.child(Integer.toString(next_key)).child("kosher").setValue(kosher.isChecked());
+            next_key = Support.generate_recipe_key();
+            String key = String.valueOf(next_key);
+            refRecipes.child(key).setValue("");
+            refRecipes.child(key).child("name").setValue(str_name);
+            refRecipes.child(key).child("description").setValue(str_description);
+            refRecipes.child(key).child("cal").setValue(str_cal);
+            refRecipes.child(key).child("ingredients").setValue(str_ingredients);
+            refRecipes.child(key).child("instructions").setValue(str_instructions);
+            refRecipes.child(key).child("topping").setValue(str_topping);
+            refRecipes.child(key).child("kosher").setValue(kosher.isChecked());
         }
     }
 }

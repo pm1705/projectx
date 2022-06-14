@@ -9,7 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Yakirhelp">
-        <activity android:name=".register_activity"></activity>
+        <activity
+            android:name=".AddRestaruant"
+            android:exported="false" />
+        <activity android:name=".register_activity" />
         <activity android:name=".login_activity" />
         <activity android:name=".temp_screen">
             <intent-filter>
