@@ -20,16 +20,16 @@ import java.util.ArrayList;
 public class login_activity extends AppCompatActivity {
 
     EditText email, pass;
-    TextView errors;
+    TextView errors; // הערות למשתמש
 
-    ArrayList usersEmails,usersPasswords;
+    ArrayList usersEmails,usersPasswords; // השוואה לענן
     boolean email_exist;
-    String tempMail, tempPass, currentMail, currentPass;
+    String str_email, str_pass, currentMail, currentPass;
     int userId;
 
     Intent main_screen;
 
-    SharedPreferences.Editor editor;
+    SharedPreferences.Editor editor; // זיכרון פנימי
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +48,7 @@ public class login_activity extends AppCompatActivity {
         usersEmails = new ArrayList();
         usersPasswords = new ArrayList();
 
-        refUsers.addListenerForSingleValueEvent(new ValueEventListener() {
+        refUsers.addListenerForSingleValueEvent(new ValueEventListener() { // מוציא מידע מהענן
             @Override
             public void onDataChange(@NonNull DataSnapshot dS) {
                 usersEmails.clear();
@@ -69,22 +69,22 @@ public class login_activity extends AppCompatActivity {
 
 
     public void submitLogin(View view) {
-        tempMail = email.getText().toString();
-        tempPass = pass.getText().toString();
+        str_email = email.getText().toString();
+        str_pass = pass.getText().toString();
         email_exist = false;
 
-        for (int i = 0; i < usersEmails.size(); i++){
-            if (tempMail.equals(usersEmails.get(i))){
+        for (int i = 0; i < usersEmails.size() && !email_exist; i++){
+            if (str_email.equals(usersEmails.get(i))){
                 email_exist = true;
                 userId = i;
             }
         }
         if (email_exist){
-            if (tempPass.equals(usersPasswords.get(userId))){
+            if (str_pass.equals(usersPasswords.get(userId))){
 
                 errors.setText("succesful login!");
 
-                editor.putBoolean("logged_in",true);
+                editor.putBoolean("logged_in",true); // זיכרון פנימי
                 editor.putInt("key_id",userId);
                 editor.commit();
 
@@ -98,7 +98,7 @@ public class login_activity extends AppCompatActivity {
             }
         }
         else {
-            errors.setText("there is no user associated with this email address.");
+            errors.setText("There is no user associated with this email address.");
             editor.putBoolean("logged_in",false);
             editor.putInt("key_id",-1);
             editor.commit();

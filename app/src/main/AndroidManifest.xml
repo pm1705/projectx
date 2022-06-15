@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Yakirhelp">
-        <activity android:name=".browse_recipes"></activity>
+        <activity android:name=".browse_recipes" />
         <activity android:name=".personal_page" />
         <activity android:name=".register_activity" />
         <activity android:name=".main_screen_activity" />
@@ -17,6 +17,7 @@
         <activity android:name=".RecipePage" />
         <activity android:name=".login_activity" />
         <activity android:name=".AddRecipe" />
+        <activity android:name=".AddRestaruant" />
         <activity android:name=".temp_screen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

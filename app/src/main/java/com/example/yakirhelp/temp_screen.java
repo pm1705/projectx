@@ -12,7 +12,7 @@ public class temp_screen extends AppCompatActivity {
 
     Intent login_intent, register_intent, main_screen_intent;
 
-    SharedPreferences.Editor editor;
+    SharedPreferences.Editor editor; // שהמחשב יזכור שאני מחובר
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

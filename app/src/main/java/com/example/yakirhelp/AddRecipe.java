@@ -2,6 +2,7 @@ package com.example.yakirhelp;
 
 import static com.example.yakirhelp.FBRefs.refRecipes;
 import static com.example.yakirhelp.FBRefs.refUsers;
+import static com.example.yakirhelp.main_screen_activity.current_user;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -42,10 +43,11 @@ public class AddRecipe extends AppCompatActivity {
         instructions = (EditText)findViewById(R.id.instructions_recipe);
         topping = (EditText)findViewById(R.id.topping_recipe);
         kosher = (Switch)findViewById(R.id.kosher_recipe);
+        errors = (TextView)findViewById(R.id.errors_recipe) ;
 
         Recipes = new ArrayList();
 
-        refRecipes.addListenerForSingleValueEvent(new ValueEventListener() {
+        refRecipes.addListenerForSingleValueEvent(new ValueEventListener() { // לקחת מתכונים
             @Override
             public void onDataChange(@NonNull DataSnapshot dS) {
                 Recipes.clear();
@@ -103,15 +105,16 @@ public class AddRecipe extends AppCompatActivity {
     }
 
     public void submit_recipe(View view) {
-        String errors = "";
-        if (!valid_name()){errors += "Name is too short.\n";}
-        if (!valid_description()){errors += "\n";}
-        if (!valid_cal()){errors += "Invalid number of calories.\n";}
-        if (!valid_ingredients()){errors += "must be at least one ingredient.\n";}
-        if (!valid_instructions()){errors += "must be at least one instruction.\n";}
-        if (!valid_topping()){errors += "\n";}
-        if (errors == ""){
-            next_key = Support.generate_recipe_key();
+        String error = "";
+        if (!valid_name()){error += "Name is too short.\n";}
+        if (!valid_description()){error += "\n";}
+        if (!valid_cal()){error += "Invalid number of calories.\n";}
+        if (!valid_ingredients()){error += "must be at least one ingredient.\n";}
+        if (!valid_instructions()){error += "must be at least one instruction.\n";}
+        if (!valid_topping()){error += "\n";}
+        errors.setText(error);
+        if (error == ""){
+            next_key = Recipes.size();
             String key = String.valueOf(next_key);
             refRecipes.child(key).setValue("");
             refRecipes.child(key).child("name").setValue(str_name);
@@ -121,7 +124,8 @@ public class AddRecipe extends AppCompatActivity {
             refRecipes.child(key).child("instructions").setValue(str_instructions);
             refRecipes.child(key).child("topping").setValue(str_topping);
             refRecipes.child(key).child("kosher").setValue(kosher.isChecked());
-            // add to user
+            refUsers.child(String.valueOf(current_user.getId())).child("recipes").child(key).setValue(" ");
+            finish();
         }
     }
 }

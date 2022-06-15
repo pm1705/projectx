@@ -3,11 +3,13 @@ package com.example.yakirhelp;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.media.Image;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -24,6 +26,7 @@ public class personal_page extends AppCompatActivity implements AdapterView.OnIt
 
     EditText uname, email, pass, age, weight, height, location;
     Spinner gender, activity_level;
+    ImageView avatar;
     String str_uname, str_email, str_pass, str_age, str_weight, str_height, str_location, currentMail;
     TextView errors;
     ArrayList usersEmails;
@@ -47,6 +50,8 @@ public class personal_page extends AppCompatActivity implements AdapterView.OnIt
         activity_level = (Spinner)findViewById(R.id.activity_level_register);
         location = (EditText)findViewById(R.id.location_register);
         errors = (TextView)findViewById(R.id.error);
+
+        avatar = (ImageView)findViewById(R.id.profile_image);
 
         uname.setText(current_user.getName());
         email.setText(current_user.getEmail());
@@ -192,6 +197,4 @@ public class personal_page extends AppCompatActivity implements AdapterView.OnIt
     public void onNothingSelected(AdapterView<?> adapterView) {
     }
 
-    public void submit_changes(View view) {
-    }
 }

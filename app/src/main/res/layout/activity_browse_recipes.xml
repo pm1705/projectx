@@ -34,8 +34,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="70"
                 android:ems="10"
-                android:inputType="textPersonName"
-                android:text="Name" />
+                android:inputType="textPersonName" />
 
             <Space
                 android:layout_width="0px"

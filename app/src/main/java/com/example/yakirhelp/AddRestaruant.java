@@ -3,13 +3,19 @@ package com.example.yakirhelp;
 import static com.example.yakirhelp.FBRefs.refRecipes;
 import static com.example.yakirhelp.FBRefs.refRestaurants;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -21,6 +27,9 @@ public class AddRestaruant extends AppCompatActivity {
     String str_res_name, str_res_link, str_res_location, str_pro_name, str_pro_description, str_pro_calories;
     TextView res_errors, pro_errors;
 
+    Intent main_screen_intent;
+
+    ArrayList<String> Recipes, Restaurnts;
     ArrayList<Product> products;
 
     @Override
@@ -34,10 +43,42 @@ public class AddRestaruant extends AppCompatActivity {
         pro_name = (EditText)findViewById(R.id.pro_name_add_res);
         pro_description = (EditText)findViewById(R.id.pro_description_add_res);
         pro_calories = (EditText)findViewById(R.id.pro_calories_add_res);
+        kosher = (Switch)findViewById(R.id.res_kosher_add_res);
         res_errors = (TextView)findViewById(R.id.res_errors_add_res);
         pro_errors = (TextView)findViewById(R.id.pro_errors_add_res);
 
+
         products = new ArrayList<Product>();
+
+        main_screen_intent = new Intent(this, main_screen_activity.class);
+
+
+        refRecipes.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dS) {
+                Recipes.clear();
+                for (DataSnapshot data : dS.getChildren()) {
+                    Recipes.add("" + data.getKey());
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
+        });
+        refRestaurants.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dS) {
+                Restaurnts.clear();
+                for (DataSnapshot data : dS.getChildren()) {
+                    Restaurnts.add("" + data.getKey());
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
+        });
 
     }
 
@@ -94,7 +135,7 @@ public class AddRestaruant extends AppCompatActivity {
     }
 
     private ArrayList<String> locations(){
-        ArrayList<String> list = new ArrayList<String>(Arrays.asList(str_res_location.split(" , ")));
+        ArrayList<String> list = new ArrayList<String>(Arrays.asList(str_res_location.split("\n")));
         return list;
     }
 
@@ -107,16 +148,20 @@ public class AddRestaruant extends AppCompatActivity {
         pro_errors.setText(errors);
         if (errors == ""){
             // add to product list
-            String key = String.valueOf(Support.generate_recipe_key());
-            Product temp = new Product(str_pro_name, str_pro_description,
-                    Integer.parseInt(str_pro_calories), kosher.isChecked(), key);
-            products.add(temp);
+            String key = String.valueOf(Recipes.size());
+            products.add(new Product(str_pro_name, str_pro_description,
+                            Double.parseDouble(str_pro_calories), kosher.isChecked(), key)
+                        );
             // add to firebase
             refRecipes.child(key).setValue("");
             refRecipes.child(key).child("name").setValue(str_pro_name);
             refRecipes.child(key).child("description").setValue(str_pro_description);
             refRecipes.child(key).child("calories").setValue(Integer.parseInt(str_pro_calories));
             refRecipes.child(key).child("kosher").setValue(kosher.isChecked());
+            // clean fields
+            pro_name.setText("");
+            pro_description.setText("");
+            pro_calories.setText("");
         }
     }
 
@@ -128,7 +173,7 @@ public class AddRestaruant extends AppCompatActivity {
         if (!valid_products()){errors += " There must be at least one product.\n";}
         res_errors.setText(errors);
         if (errors == ""){
-            String key = String.valueOf(Support.generate_restaurant_key());
+            String key = String.valueOf(Restaurnts.size());
             refRestaurants.child(key).setValue("");
             refRestaurants.child(key).child("name").setValue(str_res_name);
             refRestaurants.child(key).child("link").setValue(str_res_link);
@@ -141,6 +186,7 @@ public class AddRestaruant extends AppCompatActivity {
             for (int i = 0; i < products.size(); i++){
                 refRestaurants.child(key).child("locations").child(products.get(i).getKey()).setValue("");
             }
+            startActivity(main_screen_intent);
 
         }
     }

@@ -5,9 +5,12 @@
       <map>
         <entry key="..\:/Code/noa/app/src/main/res/layout/activity_add_recipe.xml" value="0.5" />
         <entry key="..\:/Code/noa/app/src/main/res/layout/activity_add_restaruant.xml" value="0.5208333333333334" />
-        <entry key="..\:/Code/noa/app/src/main/res/layout/activity_login_activity.xml" value="0.28020833333333334" />
+        <entry key="..\:/Code/noa/app/src/main/res/layout/activity_browse_recipes.xml" value="0.5" />
+        <entry key="..\:/Code/noa/app/src/main/res/layout/activity_login_activity.xml" value="0.5" />
         <entry key="..\:/Code/noa/app/src/main/res/layout/activity_main.xml" value="0.5208333333333334" />
+        <entry key="..\:/Code/noa/app/src/main/res/layout/activity_main_screen_activity.xml" value="0.5208333333333334" />
         <entry key="..\:/Code/noa/app/src/main/res/layout/activity_my_recipes.xml" value="0.5208333333333334" />
+        <entry key="..\:/Code/noa/app/src/main/res/layout/activity_personal_page.xml" value="0.5208333333333334" />
         <entry key="..\:/Code/noa/app/src/main/res/layout/activity_recipe_page.xml" value="0.5208333333333334" />
         <entry key="..\:/Code/noa/app/src/main/res/layout/activity_register_activity.xml" value="0.5" />
         <entry key="..\:/Code/noa/app/src/main/res/layout/activity_vitamin_table.xml" value="0.5208333333333334" />

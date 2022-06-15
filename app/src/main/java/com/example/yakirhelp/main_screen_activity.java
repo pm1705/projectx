@@ -21,7 +21,8 @@ import static com.example.yakirhelp.FBRefs.refUsers;
 
 public class main_screen_activity extends AppCompatActivity {
 
-    Intent peronal_page_intent, new_recipe_intent, browse_recipes_intent, back_to_temp;
+    Intent peronal_page_intent, new_recipe_intent, browse_recipes_intent, add_restaurant_intent,
+            back_to_temp, vitamin_table_intent;
 
     int logged_user_id; // logged_user_id
     String log; //logged_user_id_to_str
@@ -31,7 +32,9 @@ public class main_screen_activity extends AppCompatActivity {
     TextView info_display;
     public static User current_user;
 
-    SharedPreferences.Editor editor;
+
+
+    SharedPreferences.Editor editor; // זיכרון פנימי
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +51,7 @@ public class main_screen_activity extends AppCompatActivity {
 
 
 
-        refUsers.addListenerForSingleValueEvent(new ValueEventListener() {
+        refUsers.addListenerForSingleValueEvent(new ValueEventListener() { // מוציא מידע
             @Override
             public void onDataChange(@NonNull DataSnapshot dS) {
                 for(DataSnapshot data : dS.getChildren()) {
@@ -67,8 +70,8 @@ public class main_screen_activity extends AppCompatActivity {
                                 Integer.valueOf(data.child("age").getValue().toString()),
                                 Integer.valueOf(data.child("activityLevel").getValue().toString()),
                                 logged_user_id,
-                                data.child("favorites").getValue().toString(),
-                                data.child("recipes").getValue().toString());
+                                (data.child("favorites").getValue() + "").toString(),
+                                (data.child("recipes").getValue() + "").toString());
                         info_display.setText("Logged in as: " + current_user.getName());
                     }
                 }
@@ -82,15 +85,25 @@ public class main_screen_activity extends AppCompatActivity {
         peronal_page_intent = new Intent(this, personal_page.class);
         new_recipe_intent = new Intent(this, AddRecipe.class);
         browse_recipes_intent = new Intent(this, browse_recipes.class);
+        add_restaurant_intent = new Intent(this, AddRestaruant.class);
         back_to_temp = new Intent(this, temp_screen.class);
+        vitamin_table_intent = new Intent(this, VitaminTable.class);
     }
 
     public void personal_page(View view) {
         startActivity(peronal_page_intent);
     }
 
+    public void vitamin_table_button(View view) {
+        startActivity(vitamin_table_intent);
+    }
+
     public void new_recipe(View view) {
         startActivity(new_recipe_intent);
+    }
+
+    public void new_restaurant(View view) { // רק לאדמינים
+        if (current_user.getName().equals("Admin")){startActivity(add_restaurant_intent);}
     }
 
     public void log_out(View view) {
@@ -100,7 +113,7 @@ public class main_screen_activity extends AppCompatActivity {
         startActivity(back_to_temp);
     }
 
-    public void browse_recipes(View view) {
+    public void browse_recipes(View view) { // חיפוש
         browse_recipes_intent.putExtra("option", "regular");
         startActivity(browse_recipes_intent);
     }

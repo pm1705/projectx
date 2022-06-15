@@ -36,7 +36,7 @@ public class register_activity extends AppCompatActivity implements AdapterView.
 
     Intent main_screen;
 
-    SharedPreferences.Editor editor;
+    SharedPreferences.Editor editor; // זיכרון פנימי
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +46,7 @@ public class register_activity extends AppCompatActivity implements AdapterView.
         main_screen = new Intent(this, main_screen_activity.class);
 
         SharedPreferences logged_information = getSharedPreferences("INFO",MODE_PRIVATE);
-        editor = logged_information.edit();
+        editor = logged_information.edit(); // זיכרון פנימי
 
 
         uname = (EditText)findViewById(R.id.uname_register);
@@ -74,7 +74,7 @@ public class register_activity extends AppCompatActivity implements AdapterView.
 
         usersEmails = new ArrayList();
 
-        refUsers.addListenerForSingleValueEvent(new ValueEventListener() {
+        refUsers.addListenerForSingleValueEvent(new ValueEventListener() { // במטרה לא לדרוס אימייל קיים
             @Override
             public void onDataChange(@NonNull DataSnapshot dS) {
                 usersEmails.clear();
@@ -104,31 +104,30 @@ public class register_activity extends AppCompatActivity implements AdapterView.
 
     private boolean valid_pass(){
         str_pass = pass.getText().toString();
-        if (str_pass.length() < 8) return false;
+        if (str_pass.length() <= 8) return false;
         return true;
     }
 
     private boolean valid_age(){
         str_age = age.getText().toString();
-        if (Integer.parseInt(str_age) <= 0) return false;
+        if (Integer.parseInt(str_age) <= 12) return false;
         return true;
     }
 
     private boolean valid_weight(){
         str_weight = weight.getText().toString();
-        if (Integer.parseInt(str_weight) <= 0) return false;
+        if (Integer.parseInt(str_weight) <= 20) return false;
         return true;
     }
 
     private boolean valid_height(){
         str_height = height.getText().toString();
-        if (Integer.parseInt(str_height) <= 0) return false;
+        if (Double.parseDouble(str_height) <= 50) return false;
         return true;
     }
 
     private boolean valid_location(){
         str_location = location.getText().toString();
-
         return true;
     }
 
@@ -142,7 +141,7 @@ public class register_activity extends AppCompatActivity implements AdapterView.
         return true;
     }
 
-    public boolean free_email(){
+    public boolean free_email(){ // בדיקת דריסת המייל
         str_email = email.getText().toString();
         if  (usersEmails.contains(str_email)){
             return false;
@@ -165,7 +164,7 @@ public class register_activity extends AppCompatActivity implements AdapterView.
         errors.setText(error);
         if (error == ""){
 
-            next_id = usersEmails.size();
+            next_id = usersEmails.size(); // 0, 1, 2...
 
             refUsers.child(Integer.toString(next_id)).setValue("");
             refUsers.child(Integer.toString(next_id)).child("username").setValue(str_uname);
@@ -180,7 +179,7 @@ public class register_activity extends AppCompatActivity implements AdapterView.
             refUsers.child(Integer.toString(next_id)).child("recipes").setValue("");
             refUsers.child(Integer.toString(next_id)).child("favorites").setValue("");
 
-            editor.putBoolean("logged_in",true);
+            editor.putBoolean("logged_in",true); // זיכרון פנימי
             editor.putInt("key_id",next_id);
             editor.commit();
 
