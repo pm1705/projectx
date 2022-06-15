@@ -1,4 +1,4 @@
-package com.example.yakirhelp;
+package com.example.noasApp;
 
 import org.junit.Test;
 

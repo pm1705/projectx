@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".temp_screen">
+    tools:context="com.example.noasApp.temp_screen">
 
     <Space
         android:layout_width="0px"
@@ -28,7 +28,7 @@
             android:layout_height="0dp"
             android:layout_weight="5"
             android:gravity="center"
-            android:text="Welcome to -APP-"
+            android:text="Welcome to Yummy"
             android:textSize="20sp" />
 
         <TextView

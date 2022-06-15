@@ -1,7 +1,4 @@
-package com.example.yakirhelp;
-
-import static com.example.yakirhelp.FBRefs.refRecipes;
-import static com.example.yakirhelp.FBRefs.refRestaurants;
+package com.example.noasApp;
 
 import androidx.annotation.NonNull;
 
@@ -20,7 +17,7 @@ public class Support {
 
         Recipes = new ArrayList();
 
-        refRecipes.addListenerForSingleValueEvent(new ValueEventListener() {
+        FBRefs.refRecipes.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dS) {
                 Recipes.clear();
@@ -44,7 +41,7 @@ public class Support {
 
         Restaurnts = new ArrayList();
 
-        refRestaurants.addListenerForSingleValueEvent(new ValueEventListener() {
+        FBRefs.refRestaurants.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dS) {
                 Restaurnts.clear();

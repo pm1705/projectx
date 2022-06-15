@@ -1,4 +1,4 @@
-package com.example.yakirhelp;
+package com.example.noasApp;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.noasApp.R;
 
 
 public class temp_screen extends AppCompatActivity {
@@ -20,8 +22,8 @@ public class temp_screen extends AppCompatActivity {
         setContentView(R.layout.temporay_activity);
 
         login_intent = new Intent(this, login_activity.class);
-        register_intent = new Intent(this, com.example.yakirhelp.register_activity.class);
-        main_screen_intent = new Intent(this, com.example.yakirhelp.main_screen_activity.class);
+        register_intent = new Intent(this, register_activity.class);
+        main_screen_intent = new Intent(this, main_screen_activity.class);
 
         SharedPreferences logged_information = getSharedPreferences("INFO",MODE_PRIVATE);
         editor = logged_information.edit();

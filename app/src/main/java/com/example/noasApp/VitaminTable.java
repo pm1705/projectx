@@ -1,9 +1,11 @@
-package com.example.yakirhelp;
+package com.example.noasApp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
+
+import com.example.noasApp.R;
 
 public class VitaminTable extends AppCompatActivity {
 

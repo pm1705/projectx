@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.yakirhelp">
+    package="com.example.noasApp">
 
     <application
         android:allowBackup="true"
@@ -9,16 +9,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Yakirhelp">
-        <activity android:name=".browse_recipes" />
-        <activity android:name=".personal_page" />
-        <activity android:name=".register_activity" />
-        <activity android:name=".main_screen_activity" />
-        <activity android:name=".VitaminTable" />
-        <activity android:name=".RecipePage" />
-        <activity android:name=".login_activity" />
-        <activity android:name=".AddRecipe" />
-        <activity android:name=".AddRestaruant" />
-        <activity android:name=".temp_screen">
+        <activity android:name="com.example.noasApp.browse_recipes" />
+        <activity android:name="com.example.noasApp.personal_page" />
+        <activity android:name="com.example.noasApp.register_activity" />
+        <activity android:name="com.example.noasApp.main_screen_activity" />
+        <activity android:name="com.example.noasApp.VitaminTable" />
+        <activity android:name="com.example.noasApp.RecipePage" />
+        <activity android:name="com.example.noasApp.login_activity" />
+        <activity android:name="com.example.noasApp.AddRecipe" />
+        <activity android:name="com.example.noasApp.AddRestaruant" />
+        <activity android:name="com.example.noasApp.temp_screen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

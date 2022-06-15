@@ -1,8 +1,6 @@
-package com.example.yakirhelp;
+package com.example.noasApp;
 
-import static com.example.yakirhelp.FBRefs.refRecipes;
-import static com.example.yakirhelp.FBRefs.refUsers;
-import static com.example.yakirhelp.main_screen_activity.current_user;
+import static com.example.noasApp.main_screen_activity.current_user;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,10 +8,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import com.example.noasApp.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
@@ -47,7 +45,7 @@ public class AddRecipe extends AppCompatActivity {
 
         Recipes = new ArrayList();
 
-        refRecipes.addListenerForSingleValueEvent(new ValueEventListener() { // לקחת מתכונים
+        FBRefs.refRecipes.addListenerForSingleValueEvent(new ValueEventListener() { // לקחת מתכונים
             @Override
             public void onDataChange(@NonNull DataSnapshot dS) {
                 Recipes.clear();
@@ -116,15 +114,15 @@ public class AddRecipe extends AppCompatActivity {
         if (error == ""){
             next_key = Recipes.size();
             String key = String.valueOf(next_key);
-            refRecipes.child(key).setValue("");
-            refRecipes.child(key).child("name").setValue(str_name);
-            refRecipes.child(key).child("description").setValue(str_description);
-            refRecipes.child(key).child("cal").setValue(str_cal);
-            refRecipes.child(key).child("ingredients").setValue(str_ingredients);
-            refRecipes.child(key).child("instructions").setValue(str_instructions);
-            refRecipes.child(key).child("topping").setValue(str_topping);
-            refRecipes.child(key).child("kosher").setValue(kosher.isChecked());
-            refUsers.child(String.valueOf(current_user.getId())).child("recipes").child(key).setValue(" ");
+            FBRefs.refRecipes.child(key).setValue("");
+            FBRefs.refRecipes.child(key).child("name").setValue(str_name);
+            FBRefs.refRecipes.child(key).child("description").setValue(str_description);
+            FBRefs.refRecipes.child(key).child("cal").setValue(str_cal);
+            FBRefs.refRecipes.child(key).child("ingredients").setValue(str_ingredients);
+            FBRefs.refRecipes.child(key).child("instructions").setValue(str_instructions);
+            FBRefs.refRecipes.child(key).child("topping").setValue(str_topping);
+            FBRefs.refRecipes.child(key).child("kosher").setValue(kosher.isChecked());
+            FBRefs.refUsers.child(String.valueOf(current_user.getId())).child("recipes").child(key).setValue(" ");
             finish();
         }
     }

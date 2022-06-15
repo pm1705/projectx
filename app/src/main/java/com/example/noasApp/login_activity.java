@@ -1,4 +1,4 @@
-package com.example.yakirhelp;
+package com.example.noasApp;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,8 +9,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
-import static com.example.yakirhelp.FBRefs.refUsers;
 
+import com.example.noasApp.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
@@ -48,7 +48,7 @@ public class login_activity extends AppCompatActivity {
         usersEmails = new ArrayList();
         usersPasswords = new ArrayList();
 
-        refUsers.addListenerForSingleValueEvent(new ValueEventListener() { // מוציא מידע מהענן
+        FBRefs.refUsers.addListenerForSingleValueEvent(new ValueEventListener() { // מוציא מידע מהענן
             @Override
             public void onDataChange(@NonNull DataSnapshot dS) {
                 usersEmails.clear();

@@ -1,7 +1,7 @@
-package com.example.yakirhelp;
+package com.example.noasApp;
 
-import static com.example.yakirhelp.FBRefs.refRecipes;
-import static com.example.yakirhelp.FBRefs.refRestaurants;
+import static com.example.noasApp.FBRefs.refRecipes;
+import static com.example.noasApp.FBRefs.refRestaurants;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import com.example.noasApp.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;

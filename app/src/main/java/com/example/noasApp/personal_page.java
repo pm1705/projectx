@@ -1,9 +1,8 @@
-package com.example.yakirhelp;
+package com.example.noasApp;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.media.Image;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -19,10 +18,10 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-import static com.example.yakirhelp.FBRefs.refUsers;
-import static com.example.yakirhelp.main_screen_activity.current_user;
+import static com.example.noasApp.FBRefs.refUsers;
+import static com.example.noasApp.main_screen_activity.current_user;
 
-public class personal_page extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
+public class    personal_page extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
 
     EditText uname, email, pass, age, weight, height, location;
     Spinner gender, activity_level;

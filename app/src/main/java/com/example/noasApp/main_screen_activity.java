@@ -1,4 +1,4 @@
-package com.example.yakirhelp;
+package com.example.noasApp;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -6,18 +6,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import com.example.noasApp.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
-
-import static com.example.yakirhelp.FBRefs.refUsers;
 
 public class main_screen_activity extends AppCompatActivity {
 
@@ -51,7 +50,7 @@ public class main_screen_activity extends AppCompatActivity {
 
 
 
-        refUsers.addListenerForSingleValueEvent(new ValueEventListener() { // מוציא מידע
+        FBRefs.refUsers.addListenerForSingleValueEvent(new ValueEventListener() { // מוציא מידע
             @Override
             public void onDataChange(@NonNull DataSnapshot dS) {
                 for(DataSnapshot data : dS.getChildren()) {
@@ -107,14 +106,37 @@ public class main_screen_activity extends AppCompatActivity {
     }
 
     public void log_out(View view) {
+        log_out_help();
+    }
+
+    public void log_out_help() {
         editor.putBoolean("logged_in",false);
         editor.putInt("key_id",-1);
         editor.commit();
         startActivity(back_to_temp);
     }
 
-    public void browse_recipes(View view) { // חיפוש
+    public void browse_recipes(View view) {
         browse_recipes_intent.putExtra("option", "regular");
         startActivity(browse_recipes_intent);
+    }
+
+    public boolean onCreateOptionsMenu(Menu menu){
+        getMenuInflater().inflate(R.menu.main, menu);
+
+        return true;
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item){
+        String itm = item.getTitle().toString();
+
+        if (itm.equals("Log Out")) log_out_help();
+        if (itm.equals("Account")) startActivity(peronal_page_intent);
+        if (itm.equals("Recipes")){
+            browse_recipes_intent.putExtra("option", "regular");
+            startActivity(browse_recipes_intent);
+        }
+
+        return true;
     }
 }

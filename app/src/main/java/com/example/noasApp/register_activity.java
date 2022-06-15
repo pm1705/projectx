@@ -1,4 +1,4 @@
-package com.example.yakirhelp;
+package com.example.noasApp;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,13 +13,12 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.example.noasApp.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-
-import static com.example.yakirhelp.FBRefs.refUsers;
 
 public class register_activity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
@@ -74,7 +73,7 @@ public class register_activity extends AppCompatActivity implements AdapterView.
 
         usersEmails = new ArrayList();
 
-        refUsers.addListenerForSingleValueEvent(new ValueEventListener() { // במטרה לא לדרוס אימייל קיים
+        FBRefs.refUsers.addListenerForSingleValueEvent(new ValueEventListener() { // במטרה לא לדרוס אימייל קיים
             @Override
             public void onDataChange(@NonNull DataSnapshot dS) {
                 usersEmails.clear();
@@ -166,18 +165,18 @@ public class register_activity extends AppCompatActivity implements AdapterView.
 
             next_id = usersEmails.size(); // 0, 1, 2...
 
-            refUsers.child(Integer.toString(next_id)).setValue("");
-            refUsers.child(Integer.toString(next_id)).child("username").setValue(str_uname);
-            refUsers.child(Integer.toString(next_id)).child("email").setValue(str_email);
-            refUsers.child(Integer.toString(next_id)).child("pass").setValue(str_pass);
-            refUsers.child(Integer.toString(next_id)).child("age").setValue(str_age);
-            refUsers.child(Integer.toString(next_id)).child("weight").setValue(str_weight);
-            refUsers.child(Integer.toString(next_id)).child("height").setValue(str_height);
-            refUsers.child(Integer.toString(next_id)).child("gender").setValue(int_gender);
-            refUsers.child(Integer.toString(next_id)).child("activityLevel").setValue(int_activity_level);
-            refUsers.child(Integer.toString(next_id)).child("location").setValue(str_location);
-            refUsers.child(Integer.toString(next_id)).child("recipes").setValue("");
-            refUsers.child(Integer.toString(next_id)).child("favorites").setValue("");
+            FBRefs.refUsers.child(Integer.toString(next_id)).setValue("");
+            FBRefs.refUsers.child(Integer.toString(next_id)).child("username").setValue(str_uname);
+            FBRefs.refUsers.child(Integer.toString(next_id)).child("email").setValue(str_email);
+            FBRefs.refUsers.child(Integer.toString(next_id)).child("pass").setValue(str_pass);
+            FBRefs.refUsers.child(Integer.toString(next_id)).child("age").setValue(str_age);
+            FBRefs.refUsers.child(Integer.toString(next_id)).child("weight").setValue(str_weight);
+            FBRefs.refUsers.child(Integer.toString(next_id)).child("height").setValue(str_height);
+            FBRefs.refUsers.child(Integer.toString(next_id)).child("gender").setValue(int_gender);
+            FBRefs.refUsers.child(Integer.toString(next_id)).child("activityLevel").setValue(int_activity_level);
+            FBRefs.refUsers.child(Integer.toString(next_id)).child("location").setValue(str_location);
+            FBRefs.refUsers.child(Integer.toString(next_id)).child("recipes").setValue("");
+            FBRefs.refUsers.child(Integer.toString(next_id)).child("favorites").setValue("");
 
             editor.putBoolean("logged_in",true); // זיכרון פנימי
             editor.putInt("key_id",next_id);

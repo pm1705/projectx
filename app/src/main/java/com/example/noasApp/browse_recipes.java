@@ -1,6 +1,5 @@
-package com.example.yakirhelp;
+package com.example.noasApp;
 
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -11,12 +10,12 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import com.example.noasApp.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 
-import static com.example.yakirhelp.FBRefs.refRecipes;
-import static com.example.yakirhelp.main_screen_activity.current_user;
+import static com.example.noasApp.main_screen_activity.current_user;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -88,11 +87,14 @@ public class browse_recipes extends AppCompatActivity implements AdapterView.OnI
             @Override
             public void onCancelled(DatabaseError databaseError) { }
         };
-        refRecipes.addValueEventListener(stuListener);
+        FBRefs.refRecipes.addValueEventListener(stuListener);
     }
 
 
     public void update_results(View view) {
+
+        matching_results.clear();
+        matching_results_info.clear();
 
         search_text = search_input.getText().toString();
 
